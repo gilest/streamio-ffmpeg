@@ -250,7 +250,7 @@ module FFMPEG
         end
 
         it "should parse video stream information" do
-          @movie.video_stream.should == "h264 (Main) (avc1 / 0x31637661), yuv420p, 640x480 [SAR 1:1 DAR 4:3], 371 kb/s, 16.75 fps, 600 tbr, 600 tbn, 1200 tbc"
+          @movie.video_stream.should == "h264 (Main) (avc1 / 0x31637661), yuv420p(tv, bt709), 640x480 [SAR 1:1 DAR 4:3], 371 kb/s, 16.75 fps, 600 tbr, 600 tbn, 1200 tbc (default)"
         end
 
         it "should know the video codec" do
