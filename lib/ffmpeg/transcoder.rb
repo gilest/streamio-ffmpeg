@@ -58,6 +58,8 @@ module FFMPEG
       FFMPEG.logger.info("Running transcoding...\n#{@command}\n")
       @output = ""
 
+      return async_transcode if @transcoder_options[:async]
+
       Open3.popen3(@command) do |stdin, stdout, stderr, wait_thr|
         begin
           yield(0.0) if block_given?
@@ -88,6 +90,19 @@ module FFMPEG
       end
     end
 
+    def async_transcode
+      # probably a way to have this fork and still pipe stdout etc. but
+      pid = fork do
+        # must take parameters as arguments to be executed without a shell wrapper
+        # this process streams video from the camera and saves it to disk
+        exec @command
+      end
+      # we need to detach the forked recording process from its parent process
+      # so that it doesn't remain as a zombie when we kill it later
+      Process.detach(pid)
+      return pid
+    end
+
     def validate_output_file(&block)
       if encoding_succeeded?
         yield(1.0) if block_given?
@@ -100,8 +115,10 @@ module FFMPEG
     end
 
     def apply_transcoder_options
-       # if true runs #validate_output_file
+      # if true runs #validate_output_file
       @transcoder_options[:validate] = @transcoder_options.fetch(:validate) { true }
+      # if true runs the transcoding process asyncrously and returns its pid
+      @transcoder_options[:async] = @transcoder_options.fetch(:async) { false }
 
       return if @movie.calculated_aspect_ratio.nil?
       case @transcoder_options[:preserve_aspect_ratio].to_s
