@@ -17,7 +17,7 @@ end
 
 
 def fixture_url_path
-  "http://github.com/streamio/streamio-ffmpeg/blob/master/spec/" + fixture_path
+  "http://s3-ap-southeast-2.amazonaws.com/streamio-fixture"
 end
 
 def tmp_path

@@ -28,7 +28,7 @@ module FFMPEG
       
       context "given a valid file provided through an url" do
         before(:all) do
-          @movie = Movie.new("#{fixture_url_path}/movies/awesome%20movie.mov?raw=true")
+          @movie = Movie.new("#{fixture_url_path}/awesome%20movie.mov")
         end
 
         it "should run ffmpeg successfully" do
