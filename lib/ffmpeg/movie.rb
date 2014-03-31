@@ -14,7 +14,7 @@ module FFMPEG
           req = Net::HTTP.new(url.host, url.port)
           res = req.request_head(url.path)
           if res.code != "200"
-            raise Exeception.new("the url is not accessible")
+            raise Errno::ENOENT, 'the url is not accessible'
           end
         else
           raise Errno::ENOENT, "the file '#{path}' does not exist" 

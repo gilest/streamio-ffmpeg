@@ -11,7 +11,7 @@ module FFMPEG
       
       context "given a non existing url" do
         it "should throw an Exception" do
-          expect { Movie.new("#{fixture_url_path}/movies/i_dont_exist") }.to raise_error(Exception, /the url is not accessible/)
+          expect { Movie.new("#{fixture_url_path}/i_dont_exist") }.to raise_error(Errno::ENOENT, /the url is not accessible/)
         end
       end
 
