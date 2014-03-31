@@ -9,7 +9,7 @@ module FFMPEG
 
     def initialize(path)
       unless File.exists?(path) 
-        if path =~ URI::regexp(["ftp", "http", "https"])
+        if path =~ URI::regexp(["ftp", "http", "https", "rtsp", "rtmp"])
           url = URI.parse(path)
           req = Net::HTTP.new(url.host, url.port)
           res = req.request_head(url.path)
