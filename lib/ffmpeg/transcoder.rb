@@ -93,12 +93,8 @@ module FFMPEG
     def async_transcode
       # probably a way to have this fork and still pipe stdout etc. but
       pid = fork do
-        # must take parameters as arguments to be executed without a shell wrapper
-        # this process streams video from the camera and saves it to disk
         exec @command
       end
-      # we need to detach the forked recording process from its parent process
-      # so that it doesn't remain as a zombie when we kill it later
       Process.detach(pid)
       return pid
     end
