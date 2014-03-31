@@ -258,7 +258,7 @@ module FFMPEG
         end
 
         it "should know the colorspace" do
-          @movie.colorspace.should == "yuv420p"
+          @movie.colorspace.should == "yuv420p(tv, bt709)"
         end
 
         it "should know the resolution" do
@@ -279,7 +279,7 @@ module FFMPEG
         end
 
         it "should parse audio stream information" do
-          @movie.audio_stream.should == "aac (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 75 kb/s"
+          @movie.audio_stream.should == "aac (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 75 kb/s (default)"
         end
 
         it "should know the audio codec" do
