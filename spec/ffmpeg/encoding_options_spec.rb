@@ -143,6 +143,18 @@ module FFMPEG
         EncodingOptions.new(watermark: "watermark.png").to_s.should == "-i watermark.png"
       end
 
+      it "should specify rtsp transport" do
+        EncodingOptions.new(rtsp_transport: "tcp").to_s.should == "-rtsp_transport tcp"
+      end
+
+      it "should specify disable video" do
+        EncodingOptions.new(disable_video: true).to_s.should == "-vn"
+      end
+
+      it "should specify disable audio" do
+        EncodingOptions.new(disable_audio: true).to_s.should == "-an"
+      end
+
       it "should specify watermark position at left top corner" do
         opts = Hash.new
         opts[:resolution] = "640x480"

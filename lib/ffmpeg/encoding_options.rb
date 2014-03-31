@@ -153,6 +153,18 @@ module FFMPEG
       end  
     end
 
+    def convert_rtsp_transport(value)
+      "-rtsp_transport #{value}"
+    end
+
+    def convert_disable_video(value)
+      '-vn' if value
+    end
+
+    def convert_disable_audio(value)
+      '-an' if value
+    end
+
     def convert_custom(value)
       value
     end
